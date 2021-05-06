@@ -5,7 +5,7 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 1.0f;
+    public float speed = 2f;
     int honey = 0;
     int nectar = 0;
     public TextMeshProUGUI honeyText;
