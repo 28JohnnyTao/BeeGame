@@ -13,7 +13,12 @@ public class Fly : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += transform.forward * Time.deltaTime * 5.0f;
+        anim.Play("Idling");
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            transform.position += transform.forward * Time.deltaTime * 5.0f;
+        }
+
         if(Input.GetButton("Fire1"))
         {
             transform.position += transform.forward * Time.deltaTime * 40.0f;
