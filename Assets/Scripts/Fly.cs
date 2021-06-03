@@ -5,32 +5,74 @@ using UnityEngine;
 public class Fly : MonoBehaviour
 {
     private Animation anim;
+    public float speed = 10f;
+    public float boostSpeed = 20f;
+    public float turnSpeed = 10f;
+    public float liftSpeed = 10f;
+    public float bankSpeed = 10f;
     //Use this for initialization
     void Start(){
-        anim = gameObject.GetComponent<Animation>();
+        //anim = gameObject.GetComponent<Animation>();
         Debug.Log("Fly script added to: " + gameObject.name);
     }
     // Update is called once per frame
     void Update()
     {
-        anim.Play("Idling");
-        if(Input.GetKeyDown(KeyCode.W))
+        if(Input.GetKey(KeyCode.W))
         {
-            transform.position += transform.forward * Time.deltaTime * 5.0f;
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
-
-        if(Input.GetButton("Fire1"))
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
         {
-            transform.position += transform.forward * Time.deltaTime * 40.0f;
+            transform.Translate(Vector3.forward * boostSpeed * Time.deltaTime);
+        }
+        if(Input.GetKey(KeyCode.A))
+        {
+            transform.Rotate(0f, -turnSpeed * Time.deltaTime, 0f, Space.World);
+        }
+        if(Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate(0f, turnSpeed * Time.deltaTime, 0f, Space.World);
         }
         if(Input.GetKey(KeyCode.E))
         {
-            Debug.Log("Stinging animation played");
-            anim.Play("Bee_Stinging");
+            transform.Rotate(liftSpeed * Time.deltaTime, 0f, 0f);
+        }
+        if(Input.GetKey(KeyCode.Q))
+        {
+            transform.Rotate(-liftSpeed * Time.deltaTime, 0f, 0f);
+        }
+        if(Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Rotate(0f, 0f, bankSpeed * Time.deltaTime);
+        }
+        if(Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Rotate(0f, 0f, -bankSpeed * Time.deltaTime);
         }
         
+        //transform.position += transform.forward * Time.deltaTime * 5.0f;
+        // anim.Play("Idling");
+        // if(Input.GetKey("space"))
+        // {
+        //     transform.position += transform.forward * Time.deltaTime * 5.0f;
+        //     transform.Rotate(Input.GetAxis("Vertical"), 0.0f, -Input.GetAxis("Horizontal"));
+        // }
 
-        transform.Rotate(Input.GetAxis("Vertical"), 0.0f, -Input.GetAxis("Horizontal"));
+        // if(Input.GetButton("Fire1"))
+        // {
+        //     transform.position += transform.forward * Time.deltaTime * 40.0f;
+        // }
+        // if(Input.GetKey(KeyCode.E))
+        // {
+        //     Debug.Log("Stinging animation played");
+        //     //anim.Play("Bee_Stinging");
+        // }
+
+
+        
+
+        
 
         
     }
