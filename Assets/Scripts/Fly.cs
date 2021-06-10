@@ -10,6 +10,7 @@ public class Fly : MonoBehaviour
     public float turnSpeed = 10f;
     public float liftSpeed = 10f;
     public float bankSpeed = 10f;
+    public bool foundEnemy = false;
     //Use this for initialization
     void Start(){
         //anim = gameObject.GetComponent<Animation>();
@@ -50,7 +51,15 @@ public class Fly : MonoBehaviour
         {
             transform.Rotate(0f, 0f, -bankSpeed * Time.deltaTime);
         }
-        
+        if(Input.GetKeyDown("space"))
+        {
+            print("Space");
+            foundEnemy = true;
+        }
+        if(Input.GetKeyUp("space"))
+        {
+            foundEnemy = false;
+        }
         //transform.position += transform.forward * Time.deltaTime * 5.0f;
         // anim.Play("Idling");
         // if(Input.GetKey("space"))
