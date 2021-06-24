@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Fly : MonoBehaviour
 {
-    private Animation anim;
+    private Animator anim;
+    int isIdlingHash = Animator.StringToHash("isIdling");
+    int attackHash = Animator.StringToHash("Attack");
     public float speed = 10f;
     public float boostSpeed = 20f;
     public float turnSpeed = 10f;
@@ -15,10 +17,12 @@ public class Fly : MonoBehaviour
     void Start(){
         //anim = gameObject.GetComponent<Animation>();
         Debug.Log("Fly script added to: " + gameObject.name);
+        anim = GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
     {
+        // anim.SetBool(isIdlingHash, true);
         if(Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
@@ -51,15 +55,16 @@ public class Fly : MonoBehaviour
         {
             transform.Rotate(0f, 0f, -bankSpeed * Time.deltaTime);
         }
-        if(Input.GetKeyDown("space"))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
+            anim.SetTrigger(attackHash);
             print("Space");
             foundEnemy = true;
         }
-        if(Input.GetKeyUp("space"))
-        {
-            foundEnemy = false;
-        }
+        // if(Input.GetKeyUp("space"))
+        // {
+        //     foundEnemy = false;
+        // }
         //transform.position += transform.forward * Time.deltaTime * 5.0f;
         // anim.Play("Idling");
         // if(Input.GetKey("space"))
