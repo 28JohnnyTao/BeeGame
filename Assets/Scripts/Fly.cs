@@ -5,8 +5,11 @@ using UnityEngine;
 public class Fly : MonoBehaviour
 {
     private Animator anim;
-    int isIdlingHash = Animator.StringToHash("isIdling");
+    //int isIdlingHash = Animator.StringToHash("isIdling");
     int attackHash = Animator.StringToHash("Attack");
+    int idlingHash = Animator.StringToHash("Idling");
+    //int stingHash = Animator.StringToHash("Sting");
+    int isFlying = Animator.StringToHash("Fly");
     public float speed = 10f;
     public float boostSpeed = 20f;
     public float turnSpeed = 10f;
@@ -22,10 +25,13 @@ public class Fly : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // anim.SetBool(isIdlingHash, true);
+        //anim.SetBool(isIdlingHash, true);
+        anim.SetBool("isIdling",true);
         if(Input.GetKey(KeyCode.W))
         {
+            anim.SetBool("isIdling", false);
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            print("Cliked!");
         }
         if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
         {
@@ -58,6 +64,7 @@ public class Fly : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             anim.SetTrigger(attackHash);
+            //anim.SetTrigger(stingHash);
             print("Space");
             foundEnemy = true;
         }
